@@ -7,3 +7,6 @@ Build using [Java Spark](http://sparkjava.com/) , [SQLite](https://www.sqlite.or
 - [x] Exposes REST API
 - [x] SQL database included
 - [x] Fallback webserver in case of malfunction of the main server
+
+## License
+MIT © [Alain Perkaz](https://aperkaz.github.io)
