@@ -1,0 +1,3 @@
+[submodule "MyManuals.FrontEnd"]
+	path = MyManuals.FrontEnd
+	url = git@github.com:agile-product-development-lnu/MyManuals.FrontEnd.git
