@@ -1,5 +1,7 @@
 package dataAccesLayer;
 
+import java.util.ArrayList;
+
 import businessClasses.Property;
 
 /**
@@ -13,6 +15,7 @@ import businessClasses.Property;
 public interface DatabaseAccess {
 
 	/* Property related methods */
+	public ArrayList<Integer> getAvailablePropertyIds();
 	public Property getProperty(int id_property);	
 	
 }

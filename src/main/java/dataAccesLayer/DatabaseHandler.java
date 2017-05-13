@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import businessClasses.Property;
@@ -118,6 +119,21 @@ public class DatabaseHandler implements DatabaseAccess {
 	/* Property related methods */
 	@Override
 	public Property getProperty(int id_property) {
-		return PropertyService.getProperty(connection, id_property);
+		Property prop = PropertyService.getProperty(connection, id_property);
+		if( !prop.equals(null)){
+			return prop;
+		}else{
+			return null;
+		}			
+	}
+	
+	@Override
+	public ArrayList<Integer> getAvailablePropertyIds() {
+		ArrayList<Integer> ids = PropertyService.getAvailablePropertyIds(connection); 
+		if( !ids.isEmpty()){
+			return ids;
+		}else{
+			return null;
+		}		
 	}
 }

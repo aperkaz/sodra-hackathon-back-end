@@ -1,5 +1,7 @@
 package businessClasses;
 
+import org.json.JSONObject;
+
 public class Property {
 
 	private int id_property;
@@ -24,17 +26,17 @@ public class Property {
 		this.last_drone_inspection = last_drone_inspection;
 		this.soil_quality = soil_quality;
 	}
-
-	public String toJson(){
-		return "{"+
-				"\"id_property\":\" "+ id_property +" \" ,"+
-				"\"avg_tree_height\":\" "+ avg_tree_height +" \" ,"+
-				"\"area\":\" "+ area +" \" ,"+
-				"\"name\":\" "+ name +" \" ,"+
-				"\"visit_count\":\" "+ visit_count +" \" ,"+
-				"\"last_drone_inspection\":\" "+ last_drone_inspection +" \" ,"+
-				"\"soil_quality\":\" "+ soil_quality +" \" "+				
-				"}";
+	
+	public JSONObject toJson(){
+		JSONObject json = new JSONObject();
+		json.put("id_property", id_property);
+		json.put("avg_tree_height", avg_tree_height);
+		json.put("area", area);
+		json.put("name", name);
+		json.put("visit_count", visit_count);
+		json.put("last_drone_inspection", last_drone_inspection);
+		json.put("soil_quality", soil_quality);		
+		return json;
 	}
 	
 	@Override

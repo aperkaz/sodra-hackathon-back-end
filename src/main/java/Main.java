@@ -6,8 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import org.json.JSONObject;
+import java.util.ArrayList;
+import java.util.Random;
 
 import businessClasses.Property;
 import dataAccesLayer.DatabaseHandler;
@@ -31,18 +31,33 @@ public class Main {
 			return serveAltRoute(req, res);
 		});
 
+		get("/randomProperty", (req, res) -> {
+			System.out.println("GET REQ: /randomProperty");
+			
+			
+			ArrayList<Integer> ids = handler.getAvailablePropertyIds();	
+			Random rand = new Random(); 
+			int value = rand.nextInt(ids.size()) +1;
+			
+			System.out.println("Value: "+value);
+			
+			
+			Property property = handler.getProperty(value);			
+			System.out.println(property.toString());
+		
+			
+			res.type("application/json");
+			return property.toJson();
+		});
+		
 		get("/property/:id_property", (req, res) -> {
 			System.out.println("GET REQ: /property/"+ req.params(":id_property"));
 			
-			// does it exist? 
 			Property property = handler.getProperty(Integer.parseInt(req.params(":id_property")));			
 			System.out.println(property.toString());
-
-			// Property object to JSON and send back
-			// TODO
 			
 			res.type("application/json");
-		    return property.toJson();
+			return property.toJson();
 		});
 
 	}

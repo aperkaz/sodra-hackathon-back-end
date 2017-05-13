@@ -1,13 +1,36 @@
 package services;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import businessClasses.Property;
 
 public class PropertyService {
+	
+	
+	public static ArrayList<Integer> getAvailablePropertyIds(Connection connection){
+		ArrayList<Integer> ids = new ArrayList<>();
+						
+		try {
+			String sql = "SELECT id_property FROM PROPERTY;";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				ids.add(result.getInt("id_property"));			
+			}
+			result.close();
+			statement.close();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		
+		
+		return ids;		
+	}
 	
 	public static Property getProperty(Connection connection, int id_property) {
 
