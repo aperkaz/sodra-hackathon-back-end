@@ -27,39 +27,42 @@ public class Main {
 		port(4567);
 		staticFiles.externalLocation(projectDir + staticDir); 
 		
+		
+		// static resource serving
 		get("/", (req, res) -> {
 			return serveAltRoute(req, res);
 		});
 
+		// API endpoints
 		get("/randomProperty", (req, res) -> {
-			System.out.println("GET REQ: /randomProperty");
-			
-			
+			System.out.println("--\nGET REQ: /randomProperty");
+						
 			ArrayList<Integer> ids = handler.getAvailablePropertyIds();	
 			Random rand = new Random(); 
 			int value = rand.nextInt(ids.size()) +1;
-			
-			System.out.println("Value: "+value);
-			
-			
+					
 			Property property = handler.getProperty(value);			
-			System.out.println(property.toString());
-		
+			System.out.println(property.toString() + "\n--");			
 			
 			res.type("application/json");
 			return property.toJson();
 		});
 		
 		get("/property/:id_property", (req, res) -> {
-			System.out.println("GET REQ: /property/"+ req.params(":id_property"));
+			System.out.println("--\nGET REQ: /property/"+ req.params(":id_property"));
 			
 			Property property = handler.getProperty(Integer.parseInt(req.params(":id_property")));			
-			System.out.println(property.toString());
+			System.out.println(property.toString() + "\n--");
 			
 			res.type("application/json");
 			return property.toJson();
 		});
 
+		// route fallbacks			
+		get("/*", (req, res) -> {
+			res.redirect("/");
+			return null;
+		});		
 	}
 
 	// serve routes
@@ -74,4 +77,3 @@ public class Main {
 	}
 	
 }
-

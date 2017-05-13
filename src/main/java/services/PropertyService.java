@@ -9,9 +9,15 @@ import java.util.ArrayList;
 
 import businessClasses.Property;
 
+/**
+ * Class to fetch the data related to de Properties from the DB.
+ * 
+ * @author alain
+ *
+ */
+
 public class PropertyService {
-	
-	
+		
 	public static ArrayList<Integer> getAvailablePropertyIds(Connection connection){
 		ArrayList<Integer> ids = new ArrayList<>();
 						
@@ -26,15 +32,14 @@ public class PropertyService {
 			statement.close();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
-		}
-		
+		}		
 		
 		return ids;		
 	}
 	
 	public static Property getProperty(Connection connection, int id_property) {
-
 		Property property = new Property();
+		
 		try {
 			String sql = "SELECT * FROM PROPERTY WHERE id_property = ?;";
 			PreparedStatement statement = connection.prepareStatement(sql);

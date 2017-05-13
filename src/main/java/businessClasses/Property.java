@@ -2,6 +2,13 @@ package businessClasses;
 
 import org.json.JSONObject;
 
+/**
+ * Hand crafted DAO for sql database storage
+ * 
+ * @author alain
+ *
+ */
+
 public class Property {
 
 	private int id_property;
