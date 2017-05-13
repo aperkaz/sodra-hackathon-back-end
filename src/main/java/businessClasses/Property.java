@@ -8,18 +8,45 @@ public class Property {
 	private String name;
 	private int visit_count;
 	private String last_drone_inspection;
-	
-	public Property(){
-		
+	private String soil_quality;
+
+	public Property() {
+
 	}
-	
-	public Property(int id_property, int avg_tree_height, int area, String name, int visit_count, String last_drone_inspection){
+
+	public Property(int id_property, int avg_tree_height, int area, String name, int visit_count,
+			String last_drone_inspection, String soil_quality) {
 		this.id_property = id_property;
 		this.avg_tree_height = avg_tree_height;
 		this.area = area;
 		this.name = name;
 		this.visit_count = visit_count;
 		this.last_drone_inspection = last_drone_inspection;
+		this.soil_quality = soil_quality;
+	}
+
+	public String toJson(){
+		return "{"+
+				"\"id_property\":\" "+ id_property +" \" ,"+
+				"\"avg_tree_height\":\" "+ avg_tree_height +" \" ,"+
+				"\"area\":\" "+ area +" \" ,"+
+				"\"name\":\" "+ name +" \" ,"+
+				"\"visit_count\":\" "+ visit_count +" \" ,"+
+				"\"last_drone_inspection\":\" "+ last_drone_inspection +" \" ,"+
+				"\"soil_quality\":\" "+ soil_quality +" \" "+				
+				"}";
+	}
+	
+	@Override
+	public String toString() {
+		return "PROPERTY \n " +
+		"Id_property: " + id_property + " \n " +
+    	"Avg_Tree_Height: "+ avg_tree_height + " \n " +
+    	"Area: " + area + " \n " +
+    	"Name: " + name + " \n " +
+    	"Visit_count: " + visit_count + " \n " +
+    	"Last_drone_inspection: " + last_drone_inspection + " \n " +
+    	"Soil_quality :" + soil_quality + " \n ";		
 	}
 
 	public int getId() {
@@ -69,7 +96,21 @@ public class Property {
 	public void setLast_drone_inspection(String last_drone_inspection) {
 		this.last_drone_inspection = last_drone_inspection;
 	}
-	
-	
-	
+
+	public int getId_property() {
+		return id_property;
+	}
+
+	public void setId_property(int id_property) {
+		this.id_property = id_property;
+	}
+
+	public String getSoil_quality() {
+		return soil_quality;
+	}
+
+	public void setSoil_quality(String soil_quality) {
+		this.soil_quality = soil_quality;
+	}
+
 }

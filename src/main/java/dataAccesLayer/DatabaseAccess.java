@@ -1,5 +1,7 @@
 package dataAccesLayer;
 
+import businessClasses.Property;
+
 /**
  * Interface defining the methods to interact with the database.
  *
@@ -11,6 +13,6 @@ package dataAccesLayer;
 public interface DatabaseAccess {
 
 	/* Property related methods */
-	public int getProperty(int id_property);	
+	public Property getProperty(int id_property);	
 	
 }

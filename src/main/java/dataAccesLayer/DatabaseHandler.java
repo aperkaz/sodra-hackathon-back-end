@@ -2,7 +2,9 @@ package dataAccesLayer;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -10,6 +12,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
+
+import businessClasses.Property;
+import services.PropertyService;
 
 /**
  * This class handles the SQLLite database requests. Requests for manuals,
@@ -22,6 +27,8 @@ public class DatabaseHandler implements DatabaseAccess {
 
 	private String databaseName;
 	private Connection connection;
+	
+	private static final int VERSION = 1;
 
 	private static DatabaseHandler instance = null;
 
@@ -34,9 +41,9 @@ public class DatabaseHandler implements DatabaseAccess {
 	
 	// default constructor
 	private DatabaseHandler() {
-		this.databaseName = "jdbc:sqlite:mymanuals.db";
-		File setup = new File("mymanuals.sql");
-		File db = new File("mymanuals.db");
+		this.databaseName = "jdbc:sqlite:database.db";
+		File setup = new File("database.sql");
+		File db = new File("database.db");
 
 		if (db.exists()) {
 			db.delete();
@@ -68,12 +75,17 @@ public class DatabaseHandler implements DatabaseAccess {
 					creationStatement.close();
 					scan.close();
 					connection.commit();
+					Writer wr = new FileWriter("version.config");
+					wr.write(Integer.toString(VERSION));
+					wr.close();
 					System.out.println("Initial database created.");
 				}
 			} catch (IOException | SQLException e) {
 				e.printStackTrace();
 			}
 		}
+		
+	
 	}
 
 	// customized constructor
@@ -105,8 +117,7 @@ public class DatabaseHandler implements DatabaseAccess {
 	
 	/* Property related methods */
 	@Override
-	public int getProperty(int id_property) {
-		// TODO return property object
-		return 0;
+	public Property getProperty(int id_property) {
+		return PropertyService.getProperty(connection, id_property);
 	}
 }
